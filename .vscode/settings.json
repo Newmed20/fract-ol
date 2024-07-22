@@ -1,8 +1,6 @@
 {
     "files.associations": {
-        "ios": "cpp",
-        "istream": "cpp",
-        "locale": "cpp",
-        "ostream": "cpp"
+        "ios": "c",
+        "locale": "c"
     }
 }

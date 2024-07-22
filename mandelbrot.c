@@ -6,34 +6,22 @@
 /*   By: mjadid <mjadid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 22:37:26 by mjadid            #+#    #+#             */
-/*   Updated: 2024/07/22 04:38:04 by mjadid           ###   ########.fr       */
+/*   Updated: 2024/07/22 09:54:05 by mjadid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
 
-/*int fucntion_handle(int key, void *param){
-printf("%d\n", key);
-return (0);
-}
-int handle(int button, int x, int y, t_mlx *mlx)
-{
-mlx_pixel_put(mlx->init, mlx->window, x, y, mlx->color);
-return (0);
-}*/
-
-
-int draw_fractal(t_mlx *mlx, int width, int height, int color)
+void draw_fractal(t_fractal *mlx, int width, int height, int color)
 {
       char *addr;
 
-      addr = mlx->addr + (height * mlx->line_lenght + width * (mlx->bit_per_pixel / 8));
+      addr = mlx->addr_ptr + (height * mlx->line_lenght + width * (mlx->bit_per_pixel / 8));
       *(unsigned int *)addr = color;
-      return (0);
 }
 
-void    mandelbrot_set(t_mlx *mlx)
+void    mandelbrot_set(t_fractal *mlx)
 {
       int max_iteration = 50;
       double z_re = 0;
@@ -74,11 +62,11 @@ void    mandelbrot_set(t_mlx *mlx)
                         sqrt_modulus = z_re * z_re + z_img * z_img;
                         i++;
                   }
-                  int color = i % 16 * 0x000000+ i % 16 * 0xFFFFFF;
+                  
                   int color2 = i % 16 * 0xF90000 + i % 16 * 0xF2D027;
-                  int color3 = i % 16 * 0x0F1011 + i % 16 * 0xE9E9E9+ i % 16 * 0x2D3030 ;
+                  
                   if (i < 17)
-                        draw_fractal(mlx, x ,  y, color);
+                        draw_fractal(mlx, x ,  y, 0xFFFFFF);
                   else if (i < 50)
                         draw_fractal(mlx,  x , y, color2);
                   else
@@ -87,41 +75,6 @@ void    mandelbrot_set(t_mlx *mlx)
                   }
                   x++;
                   }
-                  mlx_put_image_to_window(mlx->init, mlx->window, mlx->img, 0, 0);
-                  mlx_loop(mlx->init);
+                  mlx_put_image_to_window(mlx->init_ptr, mlx->window_ptr, mlx->img_ptr, 0, 0);
 }
 
-
-
-
-int main()
-{
-      t_mlx mlx;
-      
-      mlx.init = mlx_init();
-      mlx.window = mlx_new_window(mlx.init, 1000, 1000, "BATATA");
-      mlx.img = mlx_new_image(mlx.init, 1000, 1000);
-      mlx.addr = mlx_get_data_addr(mlx.img, &mlx.bit_per_pixel, &mlx.line_lenght, &mlx.endian);
-
-            //draw_fractal(&mlx, width, height, mlx.color);
-
-            //mlx_put_image_to_window(mlx.init, mlx.window, mlx.img, 0, 0);
-
-            // mlx_pixel_put(init, window, 250, 250, 0x10FF0000);
-
-            // mlx_string_put(init, window, 100, 100, 0xFFFFFFFF, "tass");
-
-            // mlx_key_hook(window, fucntion_handle, &mlx);
-
-            // mlx_mouse_hook(mlx.window, handle, &mlx);
-
-      mandelbrot_set(&mlx);
-
-      mlx_loop(mlx.init);
-}
-
-/*
- * First of all, you should know that the Mandelbrot set is always
- * between -2.1 and 0.6 on the x-axis and between -1.2 and 1.2 on the
- * Ordered
- */
