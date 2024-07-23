@@ -6,14 +6,14 @@
 /*   By: mjadid <mjadid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 02:49:29 by mjadid            #+#    #+#             */
-/*   Updated: 2024/07/23 06:49:15 by mjadid           ###   ########.fr       */
+/*   Updated: 2024/07/23 08:52:16 by elakhfif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // gcc           -lmlx -framework OpenGL -framework AppKit
 #ifndef FRACTOL_H
 # define FRACTOL_H
-# include <mlx.h>
+# include "mlx/mlx.h"
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -66,7 +66,7 @@ typedef struct s_fract
 
 //mlx_utils
 void    to_init(t_fractal *mlx);
-int		draw_fractal(t_fractal *mlx, int w, int h, int color);
+void		draw_fractal(t_fractal *mlx, int w, int h, int color);
 
 
 //fractals
