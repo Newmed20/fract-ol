@@ -6,17 +6,18 @@
 /*   By: mjadid <mjadid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 02:49:29 by mjadid            #+#    #+#             */
-/*   Updated: 2024/07/23 08:52:16 by elakhfif         ###   ########.fr       */
+/*   Updated: 2024/07/23 09:39:50 by mjadid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // gcc           -lmlx -framework OpenGL -framework AppKit
 #ifndef FRACTOL_H
 # define FRACTOL_H
-# include "mlx/mlx.h"
+# include "mlx.h"
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <math.h>
 # define WIDTH 1000
 # define HEIGHT 1000
 # define ESC 53
@@ -72,6 +73,8 @@ void		draw_fractal(t_fractal *mlx, int w, int h, int color);
 //fractals
 void    mandelbrot(t_fractal *mlx);
 void        ft_coloring(t_fractal *mlx);
+
+void    burning_ship(t_fractal *mlx);
 
 
 
