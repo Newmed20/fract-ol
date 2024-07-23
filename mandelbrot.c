@@ -6,74 +6,58 @@
 /*   By: mjadid <mjadid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 22:37:26 by mjadid            #+#    #+#             */
-/*   Updated: 2024/07/22 09:54:05 by mjadid           ###   ########.fr       */
+/*   Updated: 2024/07/23 05:01:07 by mjadid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
 
-void draw_fractal(t_fractal *mlx, int width, int height, int color)
-{
-      char *addr;
 
-      addr = mlx->addr_ptr + (height * mlx->line_lenght + width * (mlx->bit_per_pixel / 8));
-      *(unsigned int *)addr = color;
-}
 
 void    mandelbrot_set(t_fractal *mlx)
 {
-      int max_iteration = 50;
-      double z_re = 0;
-      double z_img = 0;
-      double c_re = 0;
-      double c_img = 0;
-      int i = 0;
-      int y = 0, x = 0;
+      mlx->z.re = 0;
+      mlx->z.im = 0;
+      mlx->c.re = 0;
+      mlx->c.im = 0;
+      mlx->max_iter = 50;
+      mlx->win.i = 0;
+      
       double sqrt_modulus ;
-      double scale_factor;
-      double height = 1000;
-      double width = 1000;
-      int color;
 
-      while (x < width)
+      while (mlx->win.i < WIDTH)
       {
-            y = 0;
-            while (y < height)
+            mlx->win.j = 0;
+            while (mlx->win.j < HEIGHT)
             {
-                  z_re = 0;
-                  z_img = 0;
-                  scale_factor = 4.0/ width;
-                  c_re = (x - width / 2.0) * scale_factor;
-                  c_img  = (y - height / 2.0) * scale_factor;
-                  i = 0;
-                  sqrt_modulus = z_re * z_re + z_img * z_img; //modulo = sqrt(pow(z_re, 2) + pow(z_img, 2));
-                  while ( sqrt_modulus < 4 &&  i < max_iteration)
+                  mlx->z.re = 0;
+                  mlx->z.im = 0;
+                  mlx->scale_factor = 4.0/ WIDTH;
+                  mlx->c.re = (mlx->win.i - WIDTH / 2.0) * mlx->scale_factor;
+                  mlx->c.im  = (mlx->win.j - HEIGHT / 2.0) * mlx->scale_factor;
+                  mlx->iter = 0;
+                  sqrt_modulus = mlx->z.re * mlx->z.re + mlx->z.im * mlx->z.im; 
+                  while ( sqrt_modulus < 4 &&  mlx->iter < mlx->max_iter)
                   {
                         double tmp ;
-                        tmp = z_re;
-                        /*
-                        * We store zr in a temporary variable to avoid using the
-                        * new value of zr in the z_img calculation
-                        */
-                        z_re = z_re * z_re - z_img * z_img + c_re;
-                        z_img= 2 * z_img * tmp + c_img;
-                        //modulo  = sqrt(pow(z_re, 2) + pow(z_img, 2));
-                        sqrt_modulus = z_re * z_re + z_img * z_img;
-                        i++;
+                        tmp = mlx->z.re;
+                        mlx->z.re = mlx->z.re * mlx->z.re - mlx->z.im * mlx->z.im + mlx->c.re;
+                        mlx->z.im= 2 * mlx->z.im * tmp + mlx->c.im;
+                        sqrt_modulus = mlx->z.re * mlx->z.re + mlx->z.im * mlx->z.im;
+                        mlx->iter++;
                   }
+                  int color2 = mlx->iter % 16 * 0xF90000 + mlx->iter % 16 * 0xF2D027;
                   
-                  int color2 = i % 16 * 0xF90000 + i % 16 * 0xF2D027;
-                  
-                  if (i < 17)
-                        draw_fractal(mlx, x ,  y, 0xFFFFFF);
-                  else if (i < 50)
-                        draw_fractal(mlx,  x , y, color2);
+                  if (mlx->iter < 17)
+                        draw_fractal(mlx, mlx->win.i ,  mlx->win.j, 0xFFFFFF);
+                  else if (mlx->iter< 50)
+                        draw_fractal(mlx,  mlx->win.i , mlx->win.j, color2);
                   else
-                        draw_fractal(mlx, x , y, 0x000000);
-                   y++;
+                        draw_fractal(mlx, mlx->win.i , mlx->win.j, 0x000000);
+                   mlx->win.j++;
                   }
-                  x++;
+                  mlx->win.i++;
                   }
                   mlx_put_image_to_window(mlx->init_ptr, mlx->window_ptr, mlx->img_ptr, 0, 0);
 }

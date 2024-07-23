@@ -6,7 +6,7 @@
 /*   By: mjadid <mjadid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 02:49:29 by mjadid            #+#    #+#             */
-/*   Updated: 2024/07/22 09:56:20 by mjadid           ###   ########.fr       */
+/*   Updated: 2024/07/23 04:22:42 by mjadid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,10 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
-
-
-
 # define WIDTH 1000
 # define HEIGHT 1000
 # define ESC 53
-
 # define TITLE "BATATA"
-
 
 typedef struct s_z
 {
@@ -44,7 +39,6 @@ typedef struct s_coord
 	int		i;
 	int		j;
 }			t_coord;
-
 
 typedef struct s_fract
 {
@@ -70,14 +64,21 @@ typedef struct s_fract
 } t_fractal;
 
 
-void draw_fractal(t_fractal *mlx, int width, int height, int color);
+//mlx_utils
+void    to_init(t_fractal *mlx);
+int		draw_fractal(t_fractal *mlx, int w, int h, int color);
+
+
+//fractals
 void    mandelbrot_set(t_fractal *mlx);
+
+
 
 //utils
 void ft_putstr_fd(const char *str, int fd);
 void print_guidelines();
 int	check_args(int argc, char **argv, t_fractal *t_fractal);
 int	ft_atoi( char *str);
-
+double	atof(const char *str);
 
 #endif
