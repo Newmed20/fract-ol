@@ -6,7 +6,7 @@
 /*   By: mjadid <mjadid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 05:04:58 by mjadid            #+#    #+#             */
-/*   Updated: 2024/07/23 04:59:58 by mjadid           ###   ########.fr       */
+/*   Updated: 2024/07/23 07:52:36 by mjadid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,15 @@ int main(int argc , char **argv)
     if(check_args(argc , argv , &mlx))
     {
         if(mlx.arg == 1)
-            mandelbrot_set(&mlx);
-        // else if (mlx.arg == 2)
-		// 	julia_set(&mlx);
+            mandelbrot(&mlx);
+        if (mlx.arg == 2)
+        {
+            printf("======c_reel = %f\n" , mlx.c.re);
+            printf("======c_im = %f\n" , mlx.c.im);
+			julia(&mlx);
+            printf("======c_reel = %f\n" , mlx.c.re);
+            printf("======c_im = %f\n" , mlx.c.im);
+        }
 		// else if (mlx.arg == 3)
 		// 	burning_ship_set(&mlx);
         // mlx_mouse_hook(mlx.window_ptr, zoom, &mlx);

@@ -6,7 +6,7 @@
 /*   By: mjadid <mjadid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 02:49:29 by mjadid            #+#    #+#             */
-/*   Updated: 2024/07/23 04:22:42 by mjadid           ###   ########.fr       */
+/*   Updated: 2024/07/23 06:49:15 by mjadid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,8 @@ int		draw_fractal(t_fractal *mlx, int w, int h, int color);
 
 
 //fractals
-void    mandelbrot_set(t_fractal *mlx);
+void    mandelbrot(t_fractal *mlx);
+void        ft_coloring(t_fractal *mlx);
 
 
 
@@ -80,5 +81,8 @@ void print_guidelines();
 int	check_args(int argc, char **argv, t_fractal *t_fractal);
 int	ft_atoi( char *str);
 double	atof(const char *str);
+void    julia(t_fractal *mlx);
+void        ft_coloring(t_fractal *mlx);
+void    calculate_iterations(t_fractal *mlx);
 
 #endif
