@@ -6,15 +6,13 @@
 /*   By: mjadid <mjadid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 02:49:29 by mjadid            #+#    #+#             */
-/*   Updated: 2024/07/24 02:51:33 by mjadid           ###   ########.fr       */
+/*   Updated: 2024/07/24 04:32:01 by mjadid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// gcc           -lmlx -framework OpenGL -framework AppKit
 #ifndef FRACTOL_H
 # define FRACTOL_H
 # include "mlx.h"
-# include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <math.h>
@@ -75,26 +73,23 @@ typedef struct s_fract
 
 //mlx_utils
 void    to_init(t_fractal *mlx);
-void		draw_fractal(t_fractal *mlx, int w, int h, int color);
+void	draw_fractal(t_fractal *mlx, int w, int h, int color);
+int	handle_ecs(int keycode, t_fractal *mlx);
+int	zoom(int key, int x, int y, t_fractal *mlx);
 
 
 //fractals
 void    mandelbrot(t_fractal *mlx);
-void    ft_coloring(t_fractal *mlx);
+void    julia(t_fractal *mlx);
 void    burning_ship(t_fractal *mlx);
+void    ft_coloring(t_fractal *mlx);
 
 
 
-//utils
-void ft_putstr_fd(const char *str, int fd);
+//parcing
+int	ft_parcing(int argc, char **argv, t_fractal *t_fractal);
 void print_guidelines();
-int	check_args(int argc, char **argv, t_fractal *t_fractal);
 int	ft_atoi( char *str);
 double	atof(const char *str);
-void    julia(t_fractal *mlx);
-void        ft_coloring(t_fractal *mlx);
-void    calculate_iterations(t_fractal *mlx);
-
-
 
 #endif

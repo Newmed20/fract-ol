@@ -6,53 +6,55 @@
 /*   By: mjadid <mjadid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 09:25:51 by mjadid            #+#    #+#             */
-/*   Updated: 2024/07/24 02:19:37 by mjadid           ###   ########.fr       */
+/*   Updated: 2024/07/24 04:36:41 by mjadid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
 
-void    calculate_iterations_burn(t_fractal *mlx)
+void    calculate_iterations_burn(t_fractal *frct)
 {
       double sqrt_modulus ;
 
-      mlx->max_iter = 50;
-      sqrt_modulus = mlx->z.re * mlx->z.re + mlx->z.im * mlx->z.im; 
-      while ( sqrt_modulus < 4 &&  mlx->iter < mlx->max_iter)
+      frct->max_iter = 50;
+      sqrt_modulus = frct->z.re * frct->z.re + frct->z.im * frct->z.im; 
+      while ( sqrt_modulus < 4 &&  frct->iter < frct->max_iter)
       { 
             double tmp ;
-            tmp = mlx->z.re;
-            mlx->z.re = mlx->z.re * mlx->z.re - mlx->z.im * mlx->z.im + mlx->c.re;
-            mlx->z.im= 2 * fabs(mlx->z.im * tmp) + mlx->c.im;
-            sqrt_modulus = mlx->z.re * mlx->z.re + mlx->z.im * mlx->z.im;
-            mlx->iter++;
+            tmp = frct->z.re;
+            frct->z.re = frct->z.re * frct->z.re - frct->z.im * frct->z.im + frct->c.re;
+            frct->z.im= 2 * fabs(frct->z.im * tmp) + frct->c.im;
+            sqrt_modulus = frct->z.re * frct->z.re + frct->z.im * frct->z.im;
+            frct->iter++;
       }      
 }
-void    burning_ship(t_fractal *mlx)
+
+void    burning_ship(t_fractal *frct)
 {
-      mlx->z.re = 0;
-      mlx->z.im = 0;
-      mlx->c.re = 0;
-      mlx->c.im = 0;
-      mlx->win.i = 0;
-      
-      while (mlx->win.i < WIDTH)
+      frct->img_ptr = mlx_new_image(frct->init_ptr, WIDTH, HEIGHT);
+      frct->addr_ptr = mlx_get_data_addr(frct->img_ptr, &frct->bit_per_pixel, &frct->line_lenght, &frct->endian);
+      frct->z.re = 0;
+      frct->z.im = 0;
+      frct->c.re = 0;
+      frct->c.im = 0;
+      frct->win.i = 0;  
+      while (frct->win.i < WIDTH)
       {
-            mlx->win.j = 0;
-            while (mlx->win.j < HEIGHT)
+            frct->win.j = 0;
+            while (frct->win.j < HEIGHT)
             {
-                  mlx->z.re = 0;
-                  mlx->z.im = 0;
-                  mlx->scale_factor = 4.0/ WIDTH;
-                  mlx->c.re = (mlx->win.i - WIDTH / 2.0) * mlx->scale_factor;
-                  mlx->c.im  = (mlx->win.j - HEIGHT / 2.0) * mlx->scale_factor;
-                  mlx->iter = 0;
-                  calculate_iterations_burn(mlx);
-                  ft_coloring(mlx);
-                  mlx->win.j++;
+                  frct->z.re = 0;
+                  frct->z.im = 0;
+                  frct->scale_factor = frct->zoom/ WIDTH;
+                  frct->c.re = (frct->win.i - WIDTH / 2.0) * frct->scale_factor;
+                  frct->c.im  = (frct->win.j - HEIGHT / 2.0) * frct->scale_factor;
+                  frct->iter = 0;
+                  calculate_iterations_burn(frct);
+                  ft_coloring(frct);
+                  frct->win.j++;
                   }
-                  mlx->win.i++;
+                  frct->win.i++;
                   }
-                  mlx_put_image_to_window(mlx->init_ptr, mlx->window_ptr, mlx->img_ptr, 0, 0);
+                  mlx_put_image_to_window(frct->init_ptr, frct->window_ptr, frct->img_ptr, 0, 0);
 }

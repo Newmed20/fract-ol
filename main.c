@@ -6,7 +6,7 @@
 /*   By: mjadid <mjadid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 05:04:58 by mjadid            #+#    #+#             */
-/*   Updated: 2024/07/23 09:39:25 by mjadid           ###   ########.fr       */
+/*   Updated: 2024/07/24 04:36:07 by mjadid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,20 @@
 
 int main(int argc , char **argv)
 {
-    t_fractal mlx;
+    t_fractal frct;
     
-    to_init(&mlx);
-    if(check_args(argc , argv , &mlx))
+    to_init(&frct);
+    if(ft_parcing(argc , argv , &frct))
     {
-        if(mlx.arg == 1)
-            mandelbrot(&mlx);
-        if (mlx.arg == 2)
-			julia(&mlx);
-		else if (mlx.arg == 3)
-			burning_ship(&mlx);
-        // mlx_mouse_hook(mlx.window_ptr, zoom, &mlx);
-		// mlx_key_hook(mlx.window_ptr, &handle_keypress, &mlx);
-        mlx_loop(mlx.init_ptr);
+        if(frct.arg == 1)
+            mandelbrot(&frct);
+        if (frct.arg == 2)
+			julia(&frct);
+		else if (frct.arg == 3)
+			burning_ship(&frct);
+        mlx_mouse_hook(frct.window_ptr, zoom, &frct);
+		mlx_key_hook(frct.window_ptr, &handle_ecs, &frct);
+        mlx_loop(frct.init_ptr);
     }
     else
         print_guidelines();
