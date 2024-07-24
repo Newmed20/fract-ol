@@ -6,7 +6,7 @@
 /*   By: mjadid <mjadid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 04:10:15 by mjadid            #+#    #+#             */
-/*   Updated: 2024/07/23 09:25:08 by mjadid           ###   ########.fr       */
+/*   Updated: 2024/07/24 02:55:15 by mjadid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void        coloring_julia(t_fractal *mlx)
             color = 0x000000;
       else
             color = mlx->iter % 4 * 0xFF0000 + mlx->iter % 8 * 0x00FF00 + mlx->iter % 16
-		* 0x0000FF;
+		* 0x000000FF;
     draw_fractal(mlx, mlx->win.i, mlx->win.j, color);
 }
          

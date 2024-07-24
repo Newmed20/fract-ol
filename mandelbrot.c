@@ -6,24 +6,38 @@
 /*   By: mjadid <mjadid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 22:37:26 by mjadid            #+#    #+#             */
-/*   Updated: 2024/07/23 09:55:15 by mjadid           ###   ########.fr       */
+/*   Updated: 2024/07/24 02:50:41 by mjadid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
+#include <math.h>
 
-void        ft_coloring(t_fractal *mlx)
+void ft_coloring(t_fractal *mlx) 
 {
-      int color2 = mlx->iter % 16 * 0xF90000 + mlx->iter % 16 * 0xF2D027;
-                  
-      if (mlx->iter < 17)
-            draw_fractal(mlx, mlx->win.i ,  mlx->win.j, 0xFFFFFF);
-      else if (mlx->iter< 50)
-            draw_fractal(mlx,  mlx->win.i , mlx->win.j, color2);
-      else
-            draw_fractal(mlx, mlx->win.i , mlx->win.j, 0x000000);
+    
+    int color;
+    t_rgb rgb;
+    
+    if (mlx->iter < 50) 
+    {
+        double t = (double)mlx->iter / 50.0;
+        int color1 = 0x0000FF; // Blue
+        int color2 = 0xFFFF00; // Yellow
+        
+        rgb.r = (1 - t) * ((color1 >> 16) & 0xFF) + t * ((color2 >> 16) & 0xFF);
+        rgb.g = (1 - t) * ((color1 >> 8) & 0xFF) + t * ((color2 >> 8) & 0xFF);
+        rgb.b = (1 - t) * (color1 & 0xFF) + t * (color2 & 0xFF);
+        
+        color = (rgb.r << 16) | (rgb.g << 8) | rgb.b;
+        
+        draw_fractal(mlx, mlx->win.i, mlx->win.j, color);
+    } 
+    else
+        draw_fractal(mlx, mlx->win.i, mlx->win.j, 0x000000);
 }
+
 
 void    calculate_iterations(t_fractal *mlx)
 {
@@ -48,7 +62,8 @@ void    mandelbrot(t_fractal *mlx)
       mlx->c.re = 0;
       mlx->c.im = 0;
       mlx->win.i = 0;
-      
+      int color;
+
       while (mlx->win.i < WIDTH)
       {
             mlx->win.j = 0;
@@ -63,9 +78,9 @@ void    mandelbrot(t_fractal *mlx)
                   calculate_iterations(mlx);
                   ft_coloring(mlx);
                   mlx->win.j++;
-                  }
-                  mlx->win.i++;
-                  }
-                  mlx_put_image_to_window(mlx->init_ptr, mlx->window_ptr, mlx->img_ptr, 0, 0);
+            }
+            mlx->win.i++;
+      }
+      mlx_put_image_to_window(mlx->init_ptr, mlx->window_ptr, mlx->img_ptr, 0, 0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: mjadid <mjadid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 09:38:31 by mjadid            #+#    #+#             */
-/*   Updated: 2024/07/23 09:12:09 by mjadid           ###   ########.fr       */
+/*   Updated: 2024/07/23 22:45:28 by mjadid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void print_guidelines()
     ft_putstr_fd("#./fractol 2 c_re c_img                      #\n", 2);
     ft_putstr_fd("#                                            #\n", 2);
     ft_putstr_fd("# Note: -2 < c_re < 2 && -2 < c_img < 2      #\n", 2);
-    ft_putstr_fd("# Popular coordinates: -0.8 0.156 / -0.4 0.6 #\n", 2);
+    ft_putstr_fd("# Popular coordinates: -0.162 1.04/ -0.4 0.6 #\n", 2);
     ft_putstr_fd("#                                            #\n", 2);
     ft_putstr_fd("#To view the Burning Ship set, use:          #\n", 2);
     ft_putstr_fd("#./fractol 3                                 #\n", 2);

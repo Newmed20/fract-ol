@@ -6,7 +6,7 @@
 /*   By: mjadid <mjadid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 04:12:13 by mjadid            #+#    #+#             */
-/*   Updated: 2024/07/23 09:12:06 by mjadid           ###   ########.fr       */
+/*   Updated: 2024/07/24 02:51:01 by mjadid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,3 @@ void	draw_fractal(t_fractal *mlx, int w, int h, int color)
 	addr = mlx->addr_ptr + (h * mlx->line_lenght + w * (mlx->bit_per_pixel / 8));
 	*(unsigned int *)addr = color;
 }
-
